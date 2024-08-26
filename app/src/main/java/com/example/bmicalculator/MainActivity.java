@@ -1,6 +1,7 @@
 package com.example.bmicalculator;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -117,10 +118,12 @@ public class MainActivity extends AppCompatActivity {
 
             }catch(NumberFormatException e){
                 tvResult.setTextColor(this.getResources().getColor(R.color.red));
+                tvResult.setGravity(Gravity.CENTER);
                 tvResult.setText("Invalid input. Please enter valid numbers.");
             }
         }else{
             tvResult.setTextColor(this.getResources().getColor(R.color.red));
+            tvResult.setGravity(Gravity.CENTER);
             tvResult.setText("Please Enter both Weight and Height");
         }
 
