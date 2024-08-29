@@ -39,13 +39,13 @@ public class MainActivity extends AppCompatActivity {
         tvResult = findViewById(R.id.tv_result);
 
         //Instance for spinner
-            //weight
-        ArrayAdapter<CharSequence>weightAdapter = ArrayAdapter.createFromResource(this,R.array.weight_units, android.R.layout.simple_spinner_dropdown_item);
+        //weight
+        ArrayAdapter<CharSequence> weightAdapter = ArrayAdapter.createFromResource(this, R.array.weight_units, android.R.layout.simple_spinner_dropdown_item);
         weightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerWeightUnit.setAdapter(weightAdapter);
 
-            //height
-        ArrayAdapter<CharSequence>heightAdapter = ArrayAdapter.createFromResource(this, R.array.height_units, android.R.layout.simple_spinner_dropdown_item);
+        //height
+        ArrayAdapter<CharSequence> heightAdapter = ArrayAdapter.createFromResource(this, R.array.height_units, android.R.layout.simple_spinner_dropdown_item);
         heightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerHeightUnit.setAdapter(heightAdapter);
 
@@ -66,11 +66,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void calculateBMI(){
+    private void calculateBMI() {
         String weightStr = etWeight.getText().toString();
         String heightStr = etHeight.getText().toString();
 
-        if(!weightStr.isEmpty() && !heightStr.isEmpty()){
+        if (!weightStr.isEmpty() && !heightStr.isEmpty()) {
             try {
                 double weight = Double.parseDouble(weightStr);
                 double height = Double.parseDouble(heightStr);
@@ -78,11 +78,11 @@ public class MainActivity extends AppCompatActivity {
                 String selectedWeightUnit = spinnerWeightUnit.getSelectedItem().toString();
                 String selectedHeightUnit = spinnerHeightUnit.getSelectedItem().toString();
 
-                if (selectedWeightUnit.equals("Pounds")){
+                if (selectedWeightUnit.equals("Pounds")) {
                     weight = weight * 0.453592;
                 }
 
-                switch (selectedHeightUnit){
+                switch (selectedHeightUnit) {
                     case "Feet":
                         height = height * 0.3048;
                         break;
@@ -104,9 +104,9 @@ public class MainActivity extends AppCompatActivity {
                 String category;
                 if (bmi < 18.5) {
                     category = "Underweight";
-                } else if (bmi >= 18.5 && bmi <= 24.9) {
+                } else if (bmi >= 18.5 && bmi < 25) {
                     category = "Normal";
-                } else if (bmi >= 25 && bmi <= 29.9) {
+                } else if (bmi >= 25 && bmi < 30) {
                     category = "Overweight";
                 } else {
                     category = "Obese";
@@ -114,19 +114,18 @@ public class MainActivity extends AppCompatActivity {
 
                 //Display BMI
                 tvResult.setTextColor(this.getResources().getColor(R.color.black));
-                tvResult.setText(String.format("BMI: %.2f\nCategory: %s",bmi,category));
+                tvResult.setText(String.format("BMI: %.4f\nCategory: %s", bmi, category));
 
-            }catch(NumberFormatException e){
+            } catch (NumberFormatException e) {
                 tvResult.setTextColor(this.getResources().getColor(R.color.red));
                 tvResult.setGravity(Gravity.CENTER);
                 tvResult.setText("Invalid input. Please enter valid numbers.");
             }
-        }else{
+        } else {
             tvResult.setTextColor(this.getResources().getColor(R.color.red));
             tvResult.setGravity(Gravity.CENTER);
             tvResult.setText("Please Enter both Weight and Height");
         }
-
 
 
     }
